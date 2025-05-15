@@ -70,15 +70,8 @@
       top: 0; left: 0; right: 0; bottom: 0;
       backdrop-filter: blur(0px);
       -webkit-backdrop-filter: blur(0px);
-      z-index: 1;
       animation: blurIn 2s ease-out forwards;
-    }
-
-    @keyframes blurIn {
-      to {
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-      }
+      z-index: 1;
     }
 
     .blur-overlay.mobile-fallback {
@@ -86,6 +79,13 @@
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
       background: rgba(0, 0, 0, 0.4);
+    }
+
+    @keyframes blurIn {
+      to {
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
     }
 
     header h1, header p {
@@ -116,37 +116,29 @@
     }
 
     .divider#about {
-      align-items: center;
+      background: url('https://i.imgur.com/HZCCW96.jpeg') center/cover no-repeat;
+      align-items: flex-start;
       justify-content: flex-start;
-      padding: 20px;
-      background: url('https://i.imgur.com/HZCCW96.jpeg') calc(100% + 0px) calc(50% - 90px) / cover no-repeat;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      text-align: left;
+      padding-top: 60px;
     }
 
     .divider#about h2 {
       font-size: 2.4rem;
-      margin-top: 30px;
+      margin: 0 auto 20px;
       text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
     }
 
     .divider#about .content-block {
-      text-align: left;
-      margin-left: 3%;
-      margin-bottom: 3%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
-    .divider#services {
-      background: url('https://i.imgur.com/WgGQ3hB.png') center/cover no-repeat;
-    }
-
-    .divider#contact {
-      background: url('https://i.imgur.com/HmnXtxY.png') center/cover no-repeat;
-    }
-
+    .divider#services,
+    .divider#contact,
     .divider#resources {
-      background: url('https://i.imgur.com/FT2hra3.png') center/cover no-repeat;
+      background: url('https://i.imgur.com/WgGQ3hB.png') center/cover no-repeat;
     }
 
     .divider h2 {
@@ -158,6 +150,7 @@
     .content-block {
       max-width: 800px;
       margin: auto;
+      padding: 0 20px;
     }
 
     .service-list li,
@@ -205,29 +198,10 @@
     }
 
     @media (max-width: 600px) {
-      .divider#about h2 {
-        font-size: 1.6rem;
-        margin-top: 20px;
-      }
-
-      .divider#about .content-block {
-        margin-left: 5%;
-        margin-right: 5%;
-        font-size: 0.95rem;
-        word-break: break-word;
-      }
-
-      header h1 {
-        font-size: 1.8rem;
-      }
-
-      header p {
-        font-size: 1rem;
-      }
-
-      .content-block {
-        padding: 0 10px;
-      }
+      header h1 { font-size: 1.8rem; }
+      header p { font-size: 1rem; }
+      .divider#about h2 { font-size: 1.8rem; }
+      .divider#about .content-block { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -236,7 +210,7 @@
   <header class="visible">
     <div class="blur-overlay" id="overlay"></div>
     <h1>Maddox Academy Online</h1>
-    <p>Personalized K-6 Tutoring with Emma Maddox</p>
+    <p>Personalized K-6 Tutoring with Emma Rae Ann Maddox</p>
   </header>
 
   <section class="divider fade-in-section" id="about">
@@ -304,14 +278,12 @@
       window.scrollTo({ top: 0, behavior: 'instant' });
     }, 3000);
 
-    // Check if backdrop-filter is supported
     const overlay = document.getElementById('overlay');
-    const supportsBackdrop = CSS.supports('backdrop-filter', 'blur(6px)') || CSS.supports('-webkit-backdrop-filter', 'blur(6px)');
-    if (!supportsBackdrop) {
+    const supportsBlur = CSS.supports('backdrop-filter', 'blur(6px)') || CSS.supports('-webkit-backdrop-filter', 'blur(6px)');
+    if (!supportsBlur) {
       overlay.classList.add('mobile-fallback');
     }
 
-    // Fade-in observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -326,3 +298,4 @@
   </script>
 </body>
 </html>
+
