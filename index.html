@@ -299,15 +299,16 @@
   </footer>
 
   <script>
-    // Unlock scroll after intro animation
     setTimeout(() => {
       document.body.classList.remove('scroll-lock');
       window.scrollTo({ top: 0, behavior: 'instant' });
     }, 3000);
 
-    // Mobile fallback overlay
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      document.getElementById('overlay').classList.add('mobile-fallback');
+    // Check if backdrop-filter is supported
+    const overlay = document.getElementById('overlay');
+    const supportsBackdrop = CSS.supports('backdrop-filter', 'blur(6px)') || CSS.supports('-webkit-backdrop-filter', 'blur(6px)');
+    if (!supportsBackdrop) {
+      overlay.classList.add('mobile-fallback');
     }
 
     // Fade-in observer
