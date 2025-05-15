@@ -229,6 +229,20 @@
         padding: 0 10px;
       }
     }
+
+    @media screen and (max-width: 600px) and (orientation: portrait) {
+      .divider#about h2 {
+        font-size: 1.4rem;
+        margin-top: 12px;
+      }
+
+      .divider#about .content-block {
+        font-size: 0.9rem;
+        margin-left: 4%;
+        margin-right: 4%;
+        padding-bottom: 20px;
+      }
+    }
   </style>
 </head>
 <body class="scroll-lock">
@@ -299,18 +313,17 @@
   </footer>
 
   <script>
-    // Unlock scroll after intro animation
     setTimeout(() => {
       document.body.classList.remove('scroll-lock');
       window.scrollTo({ top: 0, behavior: 'instant' });
     }, 3000);
 
-    // Mobile fallback overlay
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      document.getElementById('overlay').classList.add('mobile-fallback');
+    const overlay = document.getElementById('overlay');
+    const supportsBlur = CSS.supports('backdrop-filter', 'blur(6px)') || CSS.supports('-webkit-backdrop-filter', 'blur(6px)');
+    if (!supportsBlur) {
+      overlay.classList.add('mobile-fallback');
     }
 
-    // Fade-in observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
