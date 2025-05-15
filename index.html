@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maddox Academy Online</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+  
+  <!-- 🔁 Force scroll to top on reload -->
+  <script>
+    window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  </script>
+
+  <style>
+    :root {
+      --main-white: #ffffff;
+      --font: 'Libre Baskerville', serif;
+      --dark-overlay: rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: var(--font);
+      color: white;
+    }
+
+    body {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+    }
+
+    body.scroll-lock {
+      overflow: hidden;
+    }
+
+    header, section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 40px 20px;
+      scroll-snap-align: start;
+      position: relative;
+      text-align: center;
+      border: 5px solid white;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    header.visible, section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header {
+      background: url('https://i.imgur.com/uOvDnJL.png') center/cover no-repeat;
+    }
+
+    .blur-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      backdrop-filter: blur(0px);
+      animation: blurIn 2s ease-out forwards;
+      z-index: 1;
+    }
+
+    @keyframes blurIn {
+      to {
+        backdrop-filter: blur(6px);
+      }
+    }
+
+    header h1, header p {
+      opacity: 0;
+      position: relative;
+      z-index: 2;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      animation: fadeIn 1s ease-out 1s forwards;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      animation: fadeIn 1s ease-out 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .divider {
+      border: 5px solid white;
+    }
+
+    .divider#about {
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+      background: url('https://i.imgur.com/HZCCW96.jpeg') calc(100% + 0px) calc(50% - 90px) / cover no-repeat;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .divider#about h2 {
+      font-size: 2.4rem;
+      margin-top: 30px;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    .divider#about .content-block {
+      text-align: left;
+      margin-left: 3%;
+      margin-bottom: 3%;
+    }
+
+    .divider#services {
+      background: url('https://i.imgur.com/WgGQ3hB.png') center/cover no-repeat;
+    }
+
+    .divider#contact {
+      background: url('https://i.imgur.com/HmnXtxY.png') center/cover no-repeat;
+    }
+
+    .divider#resources {
+      background: url('https://i.imgur.com/FT2hra3.png') center/cover no-repeat;
+    }
+
+    .divider h2 {
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    .content-block {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .service-list li,
+    .resources-list li,
+    .contact ul li {
+      margin-bottom: 10px;
+      list-style: none;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .contact p {
+      font-size: 1.1rem;
+      margin: 5px 0;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .payment-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .payment-icons img {
+      width: 64px;
+      height: 64px;
+      transition: transform 0.3s ease;
+    }
+
+    .payment-icons img:hover {
+      transform: scale(1.1);
+    }
+
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    @media (min-width: 600px) {
+      header h1 { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body class="scroll-lock">
+
+  <header class="visible">
+    <div class="blur-overlay"></div>
+    <h1>Maddox Academy Online</h1>
+    <p>Personalized K-6 Tutoring with Emma Maddox</p>
+  </header>
+
+  <section class="divider fade-in-section" id="about">
+    <div class="content-block">
+      <h2>About Emma</h2>
+      <p>
+        I am family oriented, I homeschool my own son, and I'm passionate about helping children become their brightest self!<br><br>
+        I hold a <strong>Bachelor of Arts in Educational Studies specializing in Elementary Education</strong> and an <strong>Associate of Science in Elementary Education</strong>. These degrees have equipped me with a strong foundation for nurturing young minds and tailoring education to every child's unique learning style. I have worked with children of many ages and have experience inside of Elementary School Classrooms.
+      </p>
+    </div>
+  </section>
+
+  <section class="divider fade-in-section" id="services">
+    <div class="content-block">
+      <h2>My Services</h2>
+      <ul class="service-list">
+        <p>I offer tutoring services for the following subjects:</p>
+        <li>✔️ Mathematics, Language Arts, Writing, Science, and Social Studies</li>
+        <li>✔️ Grades: K–6</li>
+        <li>✔️ 30 Minute Sessions</li>
+        <li>✔️ Per Session or Package-Based</li>
+        <li>✔️ Individual Sessions</li>
+        <p>All tutoring sessions will be held on the Zoom Platform.</p>
+      </ul>
+    </div>
+  </section>
+
+  <section class="divider fade-in-section" id="contact">
+    <div class="content-block contact">
+      <h2>Want to know more?</h2>
+      <p><strong>Call or Text:</strong> 812.585.1462</p>
+      <p><strong>You can also E-Mail me:</strong> raeann62404@yahoo.com</p>
+      <p> ‎ </p>
+      <p><strong>Forms of Payment I Accept:</strong></p>
+      <div class="payment-icons">
+        <a href="https://cash.app/$yourcashtag" target="_blank">
+          <img src="https://i.imgur.com/k2VNRhr.png" alt="CashApp">
+        </a>
+        <a href="https://paypal.me/undefined" target="_blank">
+          <img src="https://i.imgur.com/FZN1tP3.png" alt="PayPal">
+        </a>
+        <a href="https://venmo.com/undefined" target="_blank">
+          <img src="https://i.imgur.com/x3lTOXO.png" alt="Venmo">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="divider fade-in-section" id="resources">
+    <div class="content-block">
+      <h2>Helpful Resources</h2>
+      <ul class="resources-list" id="resourceList">
+        <li><a href="https://www.starfall.com" target="_blank">Starfall</a></li>
+        <li><a href="https://www.funbrain.com" target="_blank">Funbrain</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Maddox Academy Online. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Unlock scroll after intro animation
+    setTimeout(() => {
+      document.body.classList.remove('scroll-lock');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 3000);
+
+    // Fade-in observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade-in-section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
