@@ -203,6 +203,14 @@
       .divider#about h2 { font-size: 1.8rem; }
       .divider#about .content-block { font-size: 0.95rem; }
     }
+
+    @media screen and (max-width: 600px) and (orientation: portrait) {
+      .divider#about {
+        justify-content: flex-end;
+        padding-bottom: 60px;
+        padding-top: 20px;
+      }
+    }
   </style>
 </head>
 <body class="scroll-lock">
@@ -298,4 +306,3 @@
   </script>
 </body>
 </html>
-
