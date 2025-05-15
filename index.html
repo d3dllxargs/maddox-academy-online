@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Maddox Academy Online</title>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
-  
-  <!-- 🔁 Force scroll to top on reload -->
+
   <script>
     window.history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
@@ -16,7 +15,6 @@
     :root {
       --main-white: #ffffff;
       --font: 'Libre Baskerville', serif;
-      --dark-overlay: rgba(0, 0, 0, 0.4);
     }
 
     * {
@@ -71,14 +69,23 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       backdrop-filter: blur(0px);
-      animation: blurIn 2s ease-out forwards;
+      -webkit-backdrop-filter: blur(0px);
       z-index: 1;
+      animation: blurIn 2s ease-out forwards;
     }
 
     @keyframes blurIn {
       to {
         backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
       }
+    }
+
+    .blur-overlay.mobile-fallback {
+      animation: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(0, 0, 0, 0.4);
     }
 
     header h1, header p {
@@ -197,15 +204,37 @@
       text-decoration: underline;
     }
 
-    @media (min-width: 600px) {
-      header h1 { font-size: 3rem; }
+    @media (max-width: 600px) {
+      .divider#about h2 {
+        font-size: 1.6rem;
+        margin-top: 20px;
+      }
+
+      .divider#about .content-block {
+        margin-left: 5%;
+        margin-right: 5%;
+        font-size: 0.95rem;
+        word-break: break-word;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .content-block {
+        padding: 0 10px;
+      }
     }
   </style>
 </head>
 <body class="scroll-lock">
 
   <header class="visible">
-    <div class="blur-overlay"></div>
+    <div class="blur-overlay" id="overlay"></div>
     <h1>Maddox Academy Online</h1>
     <p>Personalized K-6 Tutoring with Emma Maddox</p>
   </header>
@@ -240,7 +269,6 @@
       <h2>Want to know more?</h2>
       <p><strong>Call or Text:</strong> 812.585.1462</p>
       <p><strong>You can also E-Mail me:</strong> raeann62404@yahoo.com</p>
-      <p> ‎ </p>
       <p><strong>Forms of Payment I Accept:</strong></p>
       <div class="payment-icons">
         <a href="https://cash.app/$yourcashtag" target="_blank">
@@ -276,6 +304,11 @@
       document.body.classList.remove('scroll-lock');
       window.scrollTo({ top: 0, behavior: 'instant' });
     }, 3000);
+
+    // Mobile fallback overlay
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      document.getElementById('overlay').classList.add('mobile-fallback');
+    }
 
     // Fade-in observer
     const observer = new IntersectionObserver((entries) => {
